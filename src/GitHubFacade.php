@@ -13,7 +13,7 @@ namespace GitHubFacade;
 /**
  * GitHub facade.
  */
-class GitHubFacade
+class Facade
 {
     /**
      * @var array The settings array.
