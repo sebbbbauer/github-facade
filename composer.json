@@ -1,0 +1,20 @@
+{
+    "name": "sebbauer/github-facade",
+    "type": "library",
+    "description": "A small facade class to the github API for fetching some information.",
+    "keywords": ["GitHub","facade"],
+    "homepage": "https://github.com/sebbbbauer/github-facade",
+    "license": "GPL v3",
+    "authors": [
+        {
+            "name": "Sebastian Bauer",
+            "email": "i@sebastianbauer.name",
+            "homepage": "http://sebastianbauer.name",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "knplabs/github-api": "^1.7",
+        "php-http/guzzle6-adapter": "^1.1"
+    }
+}
