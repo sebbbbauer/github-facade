@@ -32,9 +32,9 @@ class GitHubFacade
      *
      * Settings parameter array should include the following values:
      *  - token: 'Your GitHub token'
-     *  - organisation: 'The name of your organisation on GitHub'
+     *  - organization: 'The name of your organization on GitHub'
      *  - perPage: The number of items per page - used for the pager, you should set it to a value more than the number
-     *             than the repository count of your organisation.
+     *             than the repository count of your organization.
      */
     public function __construct($settings)
     {
@@ -44,16 +44,16 @@ class GitHubFacade
     }
 
     /**
-     * Fetch all repositories, which are connected to the set organisation.
+     * Fetch all repositories, which are connected to the set organization.
      *
-     * @return array All repositories, which are connected to the set organisation
+     * @return array All repositories, which are connected to the set organization
      */
     public function fetchAllRepositories()
     {
         $organizationApi = $this->client->api('organization');
 
         $pager = new Github\ResultPager($this->client);
-        $parameters = array($this->getSetting('organisation'));
+        $parameters = array($this->getSetting('organization'));
         $repositories = $pager->fetchAll($organizationApi, 'repositories', $parameters);
 
         $repositoryNames = array();
@@ -80,7 +80,7 @@ class GitHubFacade
         $pullRequestsApi->setPerPage($this->getSetting('perPage'));
 
         $pager = new Github\ResultPager($this->client);
-        $parameters = array($this->getSetting('organisation'), $repositoryName);
+        $parameters = array($this->getSetting('organization'), $repositoryName);
 
         return $pager->fetchAll($pullRequestsApi, 'all', $parameters);
     }
