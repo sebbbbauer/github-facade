@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+namespace GitHubFacade;
+
 /**
  * GitHub facade.
  */
