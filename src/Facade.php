@@ -47,6 +47,28 @@ class Facade
     }
 
     /**
+     * Fetch the amount of pull request of all repositories.
+     *
+     * @return array The number of pull requests, ordered descending.
+     */
+    public function fetchPullRequestCountOfAllRepositories()
+    {
+        $repositories = $this->fetchAllRepositories();
+
+        $result = array();
+
+        foreach ($repositories as $repository) {
+            $pullRequests = $this->fetchPullRequests($repository);
+
+            $result[$repository] = count($pullRequests);
+        }
+
+        arsort($result);
+
+        return $result;
+    }
+
+    /**
      * Fetch all repositories, which are connected to the set organization.
      *
      * @return array All repositories, which are connected to the set organization
