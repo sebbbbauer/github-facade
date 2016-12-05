@@ -10,6 +10,9 @@
 
 namespace GitHubFacade;
 
+use Github\Client;
+use Github\ResultPager;
+
 /**
  * GitHub facade.
  */
@@ -21,7 +24,7 @@ class Facade
     private $settings = null;
 
     /**
-     * @var \Github\Client The GitHub client.
+     * @var Client The GitHub client.
      */
     private $client = null;
 
@@ -52,7 +55,7 @@ class Facade
     {
         $organizationApi = $this->client->api('organization');
 
-        $pager = new Github\ResultPager($this->client);
+        $pager = new ResultPager($this->client);
         $parameters = array($this->getSetting('organization'));
         $repositories = $pager->fetchAll($organizationApi, 'repositories', $parameters);
 
@@ -79,7 +82,7 @@ class Facade
         $pullRequestsApi = $this->client->api('pull_request');
         $pullRequestsApi->setPerPage($this->getSetting('perPage'));
 
-        $pager = new Github\ResultPager($this->client);
+        $pager = new ResultPager($this->client);
         $parameters = array($this->getSetting('organization'), $repositoryName);
 
         return $pager->fetchAll($pullRequestsApi, 'all', $parameters);
@@ -90,8 +93,8 @@ class Facade
      */
     protected function createClient()
     {
-        $this->client = new \Github\Client();
-        $this->client->authenticate($this->getSetting('token'), '', Github\Client::AUTH_HTTP_TOKEN);
+        $this->client = new Client();
+        $this->client->authenticate($this->getSetting('token'), '', Client::AUTH_HTTP_TOKEN);
     }
 
     /**
@@ -123,7 +126,7 @@ class Facade
     }
 
     /**
-     * @return \Github\Client
+     * @return Client
      */
     protected function getClient()
     {
@@ -131,7 +134,7 @@ class Facade
     }
 
     /**
-     * @param \Github\Client $client
+     * @param Client $client
      */
     protected function setClient($client)
     {
